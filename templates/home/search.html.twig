@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Recherche de recettes{% endblock %}
+
+{% block body %}
+
+<h1>Rechercher</h1>
+
+{{form(form)}}
+
+{% for recette in recettes %}
+
+<h4>{{recette.titre}}</h4>
+<p> Posté par : {{recette.user.firstname}} {{recette.user.lastname}} </p>
+    
+{% endfor %}
+
+{% endblock %}

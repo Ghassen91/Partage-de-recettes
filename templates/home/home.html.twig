@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+<h1>Accueil</h1>
+
+{% for recette in recettes %}
+
+<h5> {{recette.titre}} </h5>
+<p>Posté par : {{recette.user.firstname}} {{recette.user.lastname}} </p>
+    
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<h1>Inscription</h1>
+
+{% if error is defined %}
+<div class="alert alert-danger w-3"> {{error}} </div>
+
+{% endif %}
+
+ {{form(form)}}
+
+
+{% endblock %}
