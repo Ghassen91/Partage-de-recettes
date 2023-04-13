@@ -4,13 +4,12 @@ App\Entity\Recette:
     description: <fr_FR:realText()>
     createdAt: <dateTime('now')>
     updatedAt: <dateTimeBetween($createdAt, 'now')>
-    images:
-      [https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg]
+    imagesUrl: <imageUrl(360, 360, '$titre')>
     user: "@user_test"
   recette_{1..20}:
     titre: <catchPhrase()>
     description: <fr_FR:realText()>
-    images: ["<imageUrl(360, 360, $titre)>"]
+    imagesUrl: <imageUrl(360, 360, '$titre')>
     createdAt: <dateTime('now')>
     updatedAt: <dateTimeBetween($createdAt, 'now')>
     user: "@user_*"

@@ -5,8 +5,13 @@ namespace App\Entity;
 use App\Repository\RecetteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+//ce Use concerne le vich uploader
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RecetteRepository::class)]
+//cet attribut concerne vich uploader
+#[Vich\Uploadable]
 class Recette
 {
     #[ORM\Id]
@@ -17,11 +22,20 @@ class Recette
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
+    
+
+    //Il faut ajouter ces propiétés dans l'entité pour le Vich uploader
+    #[Vich\UploadableField(mapping: 'recipe_images', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
+
+
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
-
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $images = [];
 
     #[ORM\ManyToOne(inversedBy: 'recettes')]
     private ?User $user = null;
@@ -31,6 +45,9 @@ class Recette
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagesUrl = null;
 
     public function getId(): ?int
     {
@@ -49,6 +66,32 @@ class Recette
         return $this;
     }
 
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -61,17 +104,6 @@ class Recette
         return $this;
     }
 
-    public function getImages(): array
-    {
-        return $this->images;
-    }
-
-    public function setImages(?array $images): self
-    {
-        $this->images = $images;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -108,4 +140,19 @@ class Recette
 
         return $this;
     }
+
+    public function getImagesUrl(): ?string
+    {
+        return $this->imagesUrl;
+    }
+
+    public function setImagesUrl(?string $imagesUrl): self
+    {
+        $this->imagesUrl = $imagesUrl;
+
+        return $this;
+    }
+
+    
+
 }

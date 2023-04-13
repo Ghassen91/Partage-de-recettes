@@ -3,14 +3,25 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-
 <h1>Accueil</h1>
-
-{% for recette in recettes %}
-
-<h5> {{recette.titre}} </h5>
-<p>Posté par : {{recette.user.firstname}} {{recette.user.lastname}} </p>
+<div class="accueil">
     
-{% endfor %}
 
+    
+    {% for recette in recettes %}
+    <div class="recette">
+        <h5> {{recette.titre}} </h5>
+        
+        {% if recette.imageName %}
+        {# Cette ligne sert a afficher l'image uploader #}
+        <img src="{{vich_uploader_asset(recette, 'imageFile')}}" alt="">
+        {% else %}
+        <img src="{{recette.imagesUrl}}" alt="">
+        {% endif %}
+        
+        <p>Posté par : {{recette.user.firstname}} {{recette.user.lastname}} </p>
+    </div>
+    {% endfor %}
+    
+</div>
 {% endblock %}

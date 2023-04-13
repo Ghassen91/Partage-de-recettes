@@ -16,10 +16,12 @@ body {
   padding: 1rem;
 }
 
-.logo p {
+.logo a {
   font-family: "Lily Script One", cursive;
   font-size: 2.6rem;
   margin: 0;
+  text-decoration: none;
+  color: black;
 }
 
 .logo {
@@ -30,4 +32,14 @@ body {
 .menu a {
   text-decoration: none;
   color: black;
+}
+
+.accueil {
+  display: flex;
+  flex-flow: wrap;
+  gap: 100px 20px;
+}
+
+.recette img {
+  max-width: 300px;
 }

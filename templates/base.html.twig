@@ -22,7 +22,7 @@
 
         <header class="header">
         <div class="logo">
-            <p>Ma Recette</p>
+            <a href="{{path('app_home_home')}}">Ma Recette</a>
         
         <form action="{{path('app_home_search')}}" method="get">
             <input type="search" name="titre" id="" placeholder="Rechercher...">
@@ -34,8 +34,10 @@
         {% if not app.user %}
         
             <a href="{{path('app_user_signUp')}}">S'inscrire</a>
-        {% endif %}
+        
             <a href="{{path('app_login')}}">Se connecter</a>
+        {% endif %}
+        <a href="{{path('app_recette_add_new')}}">Ajouter une nouvelle recette</a>
         </nav>
         
         </header>
