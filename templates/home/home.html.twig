@@ -20,6 +20,8 @@
         {% endif %}
         
         <p>Posté par : {{recette.user.firstname}} {{recette.user.lastname}} </p>
+        <a href="{{path('app_recette_add_update', {id: recette.id})}}">Modifier</a>
+        <a href="{{path('app_recette_add_remove', {id: recette.id})}}">Supprimer</a>
     </div>
     {% endfor %}
     

@@ -29,7 +29,7 @@ class RecetteAddType extends AbstractType
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Téléchargez vos images :',
                 'data_class' => null,
-                'required' => false
+                'required' => false,
             ])
             ->add('imagesUrl', TextType::class, [
                 'label' => 'URL de l\'image :',
