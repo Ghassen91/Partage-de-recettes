@@ -31,19 +31,20 @@
         </div>
 
         <nav class="menu">
-        {% if not app.user %}
-        
-            <a href="{{path('app_user_signUp')}}">S'inscrire</a>
-        
-            <a href="{{path('app_login')}}">Se connecter</a>
-        {% endif %}
+            {% if not app.user %}
+                <a href="{{path('app_user_signUp')}}">S'inscrire</a>
+            
+                <a href="{{path('app_login')}}">Se connecter</a>
+            {% else %}
+        <a href="{{path('app_profile_show')}}">Mon profil</a>
         <a href="{{path('app_recette_add_new')}}">Ajouter une nouvelle recette</a>
+        {% endif %}
         </nav>
         
         </header>
 
         {% if app.user %}
-        <div class="mb-3">
+        <div class="mb-3 d-flex justify-content-end align-items-center">
             <h3>Bonjour {{ app.user.firstname }} !</h3>  <a href="{{ path('app_logout') }}">Déconnexion</a>
         </div>
     {% endif %}

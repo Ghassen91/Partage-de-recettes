@@ -46,8 +46,8 @@ class RecetteAddController extends AbstractController
             //j'enregistre dans la base de données
             $repository->save($recette, true);
 
-            //@TODO On redirige vers la page de profil
-            return new Response('OK');
+            //On redirige vers la page de profil
+            return $this->redirectToRoute('app_profile_show');
 
         }
         //on affiche le formulaire
@@ -91,8 +91,8 @@ class RecetteAddController extends AbstractController
             //on enregistre la recette dans la BD
             $repository->save($recette, true);
 
-            //@TODO on redirige vers la page de profil
-            return new Response('OK');
+            //On redirige vers la page de profil
+            return $this->redirectToRoute('app_profile_show');
         }
         
         //On affiche le formulaire
@@ -123,8 +123,8 @@ class RecetteAddController extends AbstractController
         //On supprime la recette de la BD
         $repository->remove($recette, true);
 
-            //@TODO on redirige vers la page de profil
-            return new Response('OK');
+            //On redirige vers la page de profil
+            return $this->redirectToRoute('app_profile_show');
         }
     
 

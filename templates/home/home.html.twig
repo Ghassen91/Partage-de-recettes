@@ -13,15 +13,13 @@
         <h5> {{recette.titre}} </h5>
         
         {% if recette.imageName %}
-        {# Cette ligne sert a afficher l'image uploader #}
-        <img src="{{vich_uploader_asset(recette, 'imageFile')}}" alt="">
+            {# Cette ligne sert a afficher l'image uploader #}
+            <img src="{{vich_uploader_asset(recette, 'imageFile')}}" alt="">
         {% else %}
-        <img src="{{recette.imagesUrl}}" alt="">
+            <img src="{{recette.imagesUrl}}" alt="">
         {% endif %}
         
         <p>Posté par : {{recette.user.firstname}} {{recette.user.lastname}} </p>
-        <a href="{{path('app_recette_add_update', {id: recette.id})}}">Modifier</a>
-        <a href="{{path('app_recette_add_remove', {id: recette.id})}}">Supprimer</a>
     </div>
     {% endfor %}
     

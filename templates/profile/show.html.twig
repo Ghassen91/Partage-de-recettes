@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+
+<h1>Mon profil</h1>
+
+<h2>Mes informations personnels</h2>
+
+<img src="{{ app.user.photoProfil }}" alt="" width="200">
+
+<h3>{{ app.user.lastname }} {{app.user.firstname}} </h3>
+
+<p>Email : {{app.user.email}} </p>
+
+<p>Inscrit depuis : {{ app.user.createdAt|date('d/m/Y') }}</p>
+
+
+<h2>Mes recettes</h2>
+
+{% if not app.user.recettes.count() %}
+
+    <p>Vous n'avez aucune recette</p>
+    <a href="{{path('app_recette_add_new')}}">Ajouter une nouvelle recette</a>
+
+{% else %}
+    {% for recette in app.user.recettes %}
+
+        <img src="{{vich_uploader_asset(recette, 'imageFile')}}" alt="" width="200">
+        <p>Nom de la recette : {{ recette.titre }}</p>
+        <p>Description : {{ recette.description }}</p>
+        <p>Crée le : {{recette.createdAt|date('d/m/Y')}} </p>
+        <a href="{{path('app_recette_add_update', {id: recette.id})}}">Modifier</a>
+        <a href="{{path('app_recette_add_remove', {id: recette.id})}}">Supprimer</a>
+        
+    {% endfor %}
+
+{% endif %}
+
+
+
+{% endblock %}
