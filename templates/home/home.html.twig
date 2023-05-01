@@ -3,7 +3,7 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<h1>Accueil</h1>
+<h1 class="h1-accueil">Accueil</h1>
 <div class="accueil">
     
 
@@ -14,12 +14,13 @@
         
         {% if recette.imageName %}
             {# Cette ligne sert a afficher l'image uploader #}
-            <img src="{{vich_uploader_asset(recette, 'imageFile')}}" alt="">
+            <a href="{{path('app_recette_show', {id: recette.id})}}"><img src="{{vich_uploader_asset(recette, 'imageFile')}}" alt=""></a>
         {% else %}
-            <img src="{{recette.imagesUrl}}" alt="">
+            <a href="{{path('app_recette_show', {id: recette.id})}}"><img src="{{recette.imagesUrl}}" alt=""></a>
         {% endif %}
         
         <p>Posté par : {{recette.user.firstname}} {{recette.user.lastname}} </p>
+        
     </div>
     {% endfor %}
     

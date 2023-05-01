@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecetteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -22,16 +24,12 @@ class Recette
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    
-
     //Il faut ajouter ces propiétés dans l'entité pour le Vich uploader
     #[Vich\UploadableField(mapping: 'recipe_images', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
-
-
 
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -48,6 +46,15 @@ class Recette
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imagesUrl = null;
+
+    #[ORM\OneToMany(mappedBy: 'recette', targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]
+    // #[ORM\JoinColumn(onDelete: "CASCADE")]
+    private Collection $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -73,7 +80,7 @@ class Recette
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTime();
+            $this->updatedAt = new \DateTimeImmutable();
         }
     }
 
@@ -149,6 +156,36 @@ class Recette
     public function setImagesUrl(?string $imagesUrl): self
     {
         $this->imagesUrl = $imagesUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getRecette() === $this) {
+                $commentaire->setRecette(null);
+            }
+        }
 
         return $this;
     }

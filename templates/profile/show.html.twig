@@ -18,26 +18,35 @@
 
 
 <h2>Mes recettes</h2>
-
+<section>
 {% if not app.user.recettes.count() %}
 
     <p>Vous n'avez aucune recette</p>
     <a href="{{path('app_recette_add_new')}}">Ajouter une nouvelle recette</a>
 
+
+</section>
 {% else %}
+<section>
+
     {% for recette in app.user.recettes %}
-
-        <img src="{{vich_uploader_asset(recette, 'imageFile')}}" alt="" width="200">
-        <p>Nom de la recette : {{ recette.titre }}</p>
-        <p>Description : {{ recette.description }}</p>
-        <p>Crée le : {{recette.createdAt|date('d/m/Y')}} </p>
-        <a href="{{path('app_recette_add_update', {id: recette.id})}}">Modifier</a>
-        <a href="{{path('app_recette_add_remove', {id: recette.id})}}">Supprimer</a>
-        
+        <div>
+            {% if recette.imageName %}
+                {# Cette ligne sert a afficher l'image uploader #}
+                <a href="{{path('app_recette_show', {id: recette.id})}}"><img src="{{vich_uploader_asset(recette, 'imageFile')}}" alt="" width="200"></a>
+            {% else %}
+                <a href="{{path('app_recette_show', {id: recette.id})}}"> <img src="{{recette.imagesUrl}}" alt="" width="200"></a>
+            {% endif %}
+            <p>Nom de la recette : {{ recette.titre }}</p>
+            <p>Description : {{ recette.description }}</p>
+            <p>Crée le : {{recette.createdAt|date('d/m/Y')}} </p>
+            
+            <a href="{{path('app_recette_add_update', {id: recette.id})}}">Modifier</a>
+            <a href="{{path('app_recette_add_remove', {id: recette.id})}}">Supprimer</a>
+        </div>
     {% endfor %}
-
 {% endif %}
-
+</section>
 
 
 {% endblock %}

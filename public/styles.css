@@ -13,7 +13,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: rgb(122, 122, 122);
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .logo a {
@@ -22,24 +22,85 @@ body {
   margin: 0;
   text-decoration: none;
   color: black;
+  transition: all 0.3s;
+}
+
+.logo a:hover{
+  color: white;
 }
 
 .logo {
   display: flex;
   align-items: center;
+  margin: 0 1rem;
+}
+
+.form-rechercher{
+  margin: 0 1.5rem;
 }
 
 .menu a {
   text-decoration: none;
   color: black;
+  margin: 0 1rem;
+  font-size: 20px;
+}
+
+.deconnexion{
+  margin: 1rem 1.5rem;
+}
+
+.btn-deconnexion{
+  width: 8rem;
+  height: 3rem;
+  margin: 0 1rem;
+  background-color: rgb(122, 122, 122);
+  border-radius: 10px;
+  border: none;
+  transition: all 0.3s;
+}
+
+.btn-deconnexion:hover{
+  background-color: rgb(181, 181, 181);
+
+}
+
+.btn-deconnexion > a {
+  text-decoration: none;
+  color: black;
 }
 
 .accueil {
+  padding: 2rem;
   display: flex;
   flex-flow: wrap;
-  gap: 100px 20px;
+  justify-content: center;
+  
 }
 
-.recette img {
-  max-width: 300px;
+.h1-accueil {
+  margin: 0 1.5rem;
 }
+
+.recette > a > img {
+  max-width: 300px;
+  transition: all 0.3s;
+}
+
+.recette > a > img:hover{
+  max-width: 280px;
+}
+
+.recette{
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin: 1.5rem;
+  width: 23rem;
+  height: 29rem;
+}
+

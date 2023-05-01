@@ -24,7 +24,7 @@
         <div class="logo">
             <a href="{{path('app_home_home')}}">Ma Recette</a>
         
-        <form action="{{path('app_home_search')}}" method="get">
+        <form class="form-rechercher" action="{{path('app_home_search')}}" method="get">
             <input type="search" name="titre" id="" placeholder="Rechercher...">
             <button type="submit">Rechercher</button>
         </form>
@@ -44,8 +44,8 @@
         </header>
 
         {% if app.user %}
-        <div class="mb-3 d-flex justify-content-end align-items-center">
-            <h3>Bonjour {{ app.user.firstname }} !</h3>  <a href="{{ path('app_logout') }}">Déconnexion</a>
+        <div class="mb-3 d-flex justify-content-end align-items-center deconnexion">
+            <h3>Bonjour {{ app.user.firstname }} !</h3>  <button class="btn-deconnexion"><a href="{{ path('app_logout') }}">Déconnexion</a></button>
         </div>
     {% endif %}
         {% block body %}{% endblock %}

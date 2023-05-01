@@ -7,13 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class RecetteAddType extends AbstractType
 {
@@ -28,7 +24,6 @@ class RecetteAddType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Téléchargez vos images :',
-                'data_class' => null,
                 'required' => false,
             ])
             ->add('imagesUrl', TextType::class, [

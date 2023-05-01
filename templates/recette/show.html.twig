@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+            
+        
+            
+        
+        <h1>{{recette.titre}}</h1>
+            {% if recette.imageName %}
+            
+            {# Cette ligne sert a afficher l'image uploader #}
+            <img src={{vich_uploader_asset(recette, 'imageFile')}} alt="{{recette.titre}}" width="200">
+            {% else %}
+            <img src="{{recette.imagesUrl}}" alt="" width="200">
+            {% endif %}
+        <p>Description : {{recette.description}}</p>
+        <p>Posté par : {{recette.user.firstname}} {{recette.user.lastname}} , le {{recette.createdAt|date('d/m/Y')}}</p>
+        
+        <ol>Commentaires : 
+        
+        {% for commentaire in recette.commentaires %}
+
+                <li>{{commentaire.user.firstname}} : <br>{{commentaire.contenu}}</li>
+                
+                
+        </ol>
+        {% endfor %}
+        {{form(form)}}
+
+{% endblock %}

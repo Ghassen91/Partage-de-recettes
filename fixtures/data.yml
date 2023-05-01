@@ -4,9 +4,16 @@ App\Entity\Recette:
     description: <fr_FR:realText()>
     createdAt: <dateTime('now')>
     updatedAt: <dateTimeBetween($createdAt, 'now')>
-    imagesUrl: <imageUrl(360, 360, '$titre')>
+    imagesUrl: https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg
     user: "@user_test"
-  recette_{1..20}:
+  recette_test2:
+    titre: "Couscous"
+    imagesUrl: https://cdn.pixabay.com/photo/2018/06/01/20/28/chicken-3447092_1280.jpg
+    description: <fr_FR:realText()>
+    createdAt: <dateTime('now')>
+    updatedAt: <dateTimeBetween($createdAt, 'now')>
+    user: "@user_*"
+  recette_{1..50}:
     titre: <catchPhrase()>
     description: <fr_FR:realText()>
     imagesUrl: <imageUrl(360, 360, '$titre')>
@@ -33,3 +40,16 @@ App\Entity\User:
     createdAt: <dateTime('now')>
     updatedAt: <dateTimeBetween($createdAt, 'now')>
     photoProfil: <imageUrl(360, 360, $firstname)>
+
+App\Entity\Commentaire:
+  commentaire_test:
+    contenu: <fr_FR:realText()>
+    createdAt: <dateTime('now')>
+    updatedAt: <dateTimeBetween($createdAt, 'now')>
+    user: "@user_test"
+  commentaire_{1..200}:
+    contenu: <fr_FR:realText()>
+    createdAt: <dateTime('now')>
+    updatedAt: <dateTimeBetween($createdAt, 'now')>
+    user: "@user_*"
+    recette: "@recette_*"
